@@ -7,63 +7,66 @@ public class Board {
 	private int rowsQuantity;
 	private int colunmsQuantity;
 	private Piece pieces[][];
-	
+
 	public Board(int rowsQuantity, int columnsQuantity) throws BoardException {
-		
-		if(rowsQuantity <1 || columnsQuantity <1) {
-			throw new BoardException("Error in board creation: Invalid row or column quantity value");
+
+		if (rowsQuantity < 1 || columnsQuantity < 1) {
+			throw new BoardException("Error in board constructor: Invalid row or column quantity value");
 		}
-		
-		this.setColunmsQuantity(columnsQuantity);
-		this.setRowsQuantity(rowsQuantity);
+
+		this.colunmsQuantity = columnsQuantity;
+		this.rowsQuantity = rowsQuantity;
 		pieces = new Piece[columnsQuantity][rowsQuantity];
 
 	}
-	
+
 	public int getRowsQuantity() {
 		return rowsQuantity;
 	}
-	public void setRowsQuantity(int rowsQuantity) {
-		this.rowsQuantity = rowsQuantity;
-	}
+
 	public int getColunmsQuantity() {
 		return colunmsQuantity;
 	}
-	public void setColunmsQuantity(int colunmsQuantity) {
-		this.colunmsQuantity = colunmsQuantity;
-	}
-	
-	public Piece piece(int row, int column) {
+
+	public Piece piece(int row, int column) throws BoardException {
+		if (!positionExists(row, column)) {
+			throw new BoardException("Error in piece method: " + "This position does not exist on this board.");
+		}
 		return pieces[row][column];
 	}
-	
-	public Piece piece(Position position) {
+
+	public Piece piece(Position position) throws BoardException {
+		if (!positionExists(position)) {
+			throw new BoardException("Error in piece method: " + "This position does not exist on this board.");
+		}
+
 		return pieces[position.getRow()][position.getColumn()];
 	}
-	
-	public void placePiece(Piece piece, Position position) {
+
+	public void placePiece(Piece piece, Position position) throws BoardException {
+		
+		if(thereIsAPiece(position)) {
+			throw new BoardException("Error in place piece: there is already a piece on position");
+		}
+		
 		this.pieces[position.getRow()][position.getColumn()] = piece;
 		piece.setPosition(position);
 	}
-	
+
 	public boolean positionExists(int row, int column) {
-		return row>=0 && row<this.getRowsQuantity() 
-			&& column>=0 && column < this.getColunmsQuantity();
+		return row >= 0 && row < this.getRowsQuantity() && column >= 0 && column < this.getColunmsQuantity();
 	}
-	
-	public boolean positionsExists(Position position) {
-		return positionExists(position.getRow(),position.getColumn());
+
+	public boolean positionExists(Position position) {
+		return positionExists(position.getRow(), position.getColumn());
+	}
+
+	public boolean thereIsAPiece(Position position) throws BoardException {
+		if(!positionExists(position)) {
+			throw new BoardException("Error in method 'ThereIsAPiace': " + "This position does not exist on this board.");
 		}
-	
+		return piece(position) != null;
 
-	public boolean thereIsAPiece(Position position) {
-		return piece(position) != null 
-			&& positionsExists(position)==true;
-	}	
-	
+	}
 
-	
-	
-	
-	
 }
