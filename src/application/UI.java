@@ -1,12 +1,13 @@
 package application;
 
+import boardgame.exceptions.BoardException;
 import chess.ChessMatch;
 import chess.ChessPiece;
 
 public class UI {
 
 	
-	public static void printBoard(ChessMatch chessmatch ) {
+	public static void printBoard(ChessMatch chessmatch ) throws BoardException {
 
 		System.out.println("  __________________");
 		for (int i = 0; i < chessmatch.getPieces().length; i++) {
