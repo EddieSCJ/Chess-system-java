@@ -11,7 +11,7 @@ public class Board {
 	public Board(int rowsQuantity, int columnsQuantity) throws BoardException {
 
 		if (rowsQuantity < 1 || columnsQuantity < 1) {
-			throw new BoardException("Error in board constructor: Invalid row or column quantity ("+columnsQuantity +", "+rowsQuantity) value");
+			throw new BoardException("Error in board constructor: Invalid row or column quantity ("+columnsQuantity +", "+rowsQuantity+") value");
 		}
 
 		this.colunmsQuantity = columnsQuantity;
