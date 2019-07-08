@@ -11,7 +11,7 @@ public class Board {
 	public Board(int rowsQuantity, int columnsQuantity) throws BoardException {
 		
 		if(rowsQuantity <1 || columnsQuantity <1) {
-			throw new BoardException("Error in board creation: Invalid row or column value");
+			throw new BoardException("Error in board creation: Invalid row or column quantity value");
 		}
 		
 		this.setColunmsQuantity(columnsQuantity);
@@ -57,7 +57,8 @@ public class Board {
 	
 
 	public boolean thereIsAPiece(Position position) {
-		return piece(position) != null && positionsExists(position)==true;
+		return piece(position) != null 
+			&& positionsExists(position)==true;
 	}	
 	
 
