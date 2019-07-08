@@ -1,31 +1,36 @@
 package boardgame;
 
+import boardgame.exceptions.BoardException;
+
 public class Board {
 
-	private int rows;
-	private int colunms;
+	private int rowsQuantity;
+	private int colunmsQuantity;
 	private Piece pieces[][];
 	
-	public Board(int rows, int columns) {
-		if(rows <0 || columns <0) {
-			throw new BoardException("Error in board creation: Invalid rows or columns value")
+	public Board(int rowsQuantity, int columnsQuantity) throws BoardException {
+		
+		if(rowsQuantity <1 || columnsQuantity <1) {
+			throw new BoardException("Error in board creation: Invalid row or column value");
 		}
-		this.setColunms(columns);
-		this.setRows(rows);
-		pieces = new Piece[columns][rows];
+		
+		this.setColunmsQuantity(columnsQuantity);
+		this.setRowsQuantity(rowsQuantity);
+		pieces = new Piece[columnsQuantity][rowsQuantity];
+
 	}
 	
-	public int getRows() {
-		return rows;
+	public int getRowsQuantity() {
+		return rowsQuantity;
 	}
-	public void setRows(int rows) {
-		this.rows = rows;
+	public void setRowsQuantity(int rowsQuantity) {
+		this.rowsQuantity = rowsQuantity;
 	}
-	public int getColunms() {
-		return colunms;
+	public int getColunmsQuantity() {
+		return colunmsQuantity;
 	}
-	public void setColunms(int colunms) {
-		this.colunms = colunms;
+	public void setColunmsQuantity(int colunmsQuantity) {
+		this.colunmsQuantity = colunmsQuantity;
 	}
 	
 	public Piece piece(int row, int column) {
@@ -41,7 +46,19 @@ public class Board {
 		piece.setPosition(position);
 	}
 	
+	public boolean positionExists(int row, int column) {
+		return row>=0 && row<this.getRowsQuantity() 
+			&& column>=0 && column < this.getColunmsQuantity();
+	}
+	
+	public boolean positionsExists(Position position) {
+		return positionExists(position.getRow(),position.getColumn());
+		}
+	
 
+	public boolean thereIsAPiece(Position position) {
+		return piece(position) != null && positionsExists(position)==true;
+	}	
 	
 
 	
