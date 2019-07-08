@@ -1,7 +1,6 @@
 package chess;
 
 import boardgame.Board;
-import boardgame.Position;
 import boardgame.exceptions.BoardException;
 import chess.exceptions.ChessException;
 import chess.pieces.King;
@@ -11,7 +10,7 @@ public class ChessMatch {
 
 	private Board board;
 	
-	public ChessMatch() throws BoardException {
+	public ChessMatch() throws BoardException, ChessException {
 		this.board = new Board(8,8);
 		initialSetup();
 	}
@@ -40,15 +39,15 @@ public class ChessMatch {
     
     
     private void initialBlackSetup() throws BoardException, ChessException {
-		placeNewPiece(new King(getBoard(), Color.BLACK), 'a',4);
-		placeNewPiece(new Rook(getBoard(), Color.BLACK) , 'a',0);
-		placeNewPiece(new Rook(getBoard(), Color.BLACK), 'a', 7);
+		placeNewPiece(new King(getBoard(), Color.BLACK), 'e',8);
+		placeNewPiece(new Rook(getBoard(), Color.BLACK) , 'a',8);
+		placeNewPiece(new Rook(getBoard(), Color.BLACK), 'h', 8);
     }
     
     private void initialWhiteSetup() throws BoardException, ChessException {
-    	placeNewPiece(new King(getBoard(), Color.WHITE), 'h',3);
-		placeNewPiece(new Rook(getBoard(), Color.WHITE) , 'h',0);
-		placeNewPiece(new Rook(getBoard(), Color.WHITE), 'h', 7);
+    	placeNewPiece(new King(getBoard(), Color.WHITE), 'e',1);
+		placeNewPiece(new Rook(getBoard(), Color.WHITE) , 'a',1);
+		placeNewPiece(new Rook(getBoard(), Color.WHITE), 'h', 1);
     }
     
 	private void initialSetup() throws BoardException, ChessException {

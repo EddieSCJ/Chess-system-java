@@ -13,6 +13,8 @@ public class Program {
 		UI.printBoard(chessMatch);
 	}catch(BoardException be ) {
 		System.out.println(be.getMessage());
+	}catch(ChessException ce) {
+		System.out.println(ce.getMessage());
 	}
 		
 		

@@ -11,7 +11,7 @@ public class Board {
 	public Board(int rowsQuantity, int columnsQuantity) throws BoardException {
 
 		if (rowsQuantity < 1 || columnsQuantity < 1) {
-			throw new BoardException("Error in board constructor: Invalid row or column quantity value");
+			throw new BoardException("Error in board constructor: Invalid row or column quantity ("+columnsQuantity +", "+rowsQuantity) value");
 		}
 
 		this.colunmsQuantity = columnsQuantity;
@@ -30,14 +30,14 @@ public class Board {
 
 	public Piece piece(int row, int column) throws BoardException {
 		if (!positionExists(row, column)) {
-			throw new BoardException("Error in piece method: " + "This position does not exist on this board.");
+			throw new BoardException("Error in piece method: " + "This position ("+row+", "+column+")does not exist on this board.");
 		}
 		return pieces[row][column];
 	}
 
 	public Piece piece(Position position) throws BoardException {
 		if (!positionExists(position)) {
-			throw new BoardException("Error in piece method: " + "This position does not exist on this board.");
+			throw new BoardException("Error in piece method: " + "This position ("+position+")does not exist on this board.");
 		}
 
 		return pieces[position.getRow()][position.getColumn()];
@@ -46,7 +46,7 @@ public class Board {
 	public void placePiece(Piece piece, Position position) throws BoardException {
 		
 		if(thereIsAPiece(position)) {
-			throw new BoardException("Error in place piece: there is already a piece on position");
+			throw new BoardException("Error in place piece: there is already a piece("+piece+") on position("+position+")");
 		}
 		
 		this.pieces[position.getRow()][position.getColumn()] = piece;
@@ -63,8 +63,9 @@ public class Board {
 
 	public boolean thereIsAPiece(Position position) throws BoardException {
 		if(!positionExists(position)) {
-			throw new BoardException("Error in method 'ThereIsAPiace': " + "This position does not exist on this board.");
+			throw new BoardException("Error in method 'ThereIsAPiace': " + "This position ("+position+") does not exist on this board.");
 		}
+
 		return piece(position) != null;
 
 	}

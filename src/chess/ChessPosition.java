@@ -9,12 +9,12 @@ public class ChessPosition {
 	private int row;
 
 	public ChessPosition(char column, int row) throws ChessException {
-		if (column < 'a' || column > 'z') {
-			throw new ChessException("Error in constructor: Invalid column value.");
+		if (column < 'a' || column > 'h') {
+			throw new ChessException("Error in chessPosition constructor: Invalid column("+column+") value.");
 		}
 
-		if (row < 0 || row > 7) {
-			throw new ChessException("Error in constructor: Invalid row value.");
+		if (row < 1 || row > 8) {
+			throw new ChessException("Error in chessPosition constructor: Invalid row("+row+") value.");
 
 		}
 		this.row = row;
