@@ -8,7 +8,7 @@ public class UI {
 	
 	public static void printBoard(ChessMatch chessmatch ) {
 
-		System.out.println(" ____________________________________");
+		System.out.println("  __________________");
 		for (int i = 0; i < chessmatch.getPieces().length; i++) {
 		
 			System.out.print((8-i)+"| ");
@@ -16,19 +16,18 @@ public class UI {
 			for (int j = 0; j < chessmatch.getPieces().length; j++) {
 				printPiece(chessmatch.getPieces()[i][j]);
 			}
-			System.out.print(" |");
-			System.out.println();
-			System.out.println(" |                                  |");
+			System.out.println("|");
+			//System.out.println(" |                                  |");
 		}
-		System.out.println(" ====================================");
-		System.out.println("    a   b   c   d   e   f   g   h    ");
+		System.out.println("  ==================");
+		System.out.println("  a b c d e f g h  ");
 	}
 	
 	public static void printPiece(ChessPiece piece) {
 		if(piece == null) {
-			System.out.print(" - ");
+			System.out.print("-");
 		}else {
-			System.out.println(" "+piece+" ");
+			System.out.print(piece);
 		}
 		System.out.print(" ");
 	}
