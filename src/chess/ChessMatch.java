@@ -34,24 +34,24 @@ public class ChessMatch {
     	return chessPieces;
     }
 
-    private void placeNewPiece(ChessPiece piece, int row, char column) throws BoardException, ChessException {
+    private void placeNewPiece(ChessPiece piece, char column, int row) throws BoardException, ChessException {
     	board.placePiece(piece, new ChessPosition(column, row).toPosition());
     }
     
     
-    private void initialBlackSetup() throws BoardException {
-		board.placePiece(new King(getBoard(), Color.BLACK), new Position(0,4));
-		board.placePiece(new Rook(getBoard(), Color.BLACK) , new Position(0,0));
-		board.placePiece(new Rook(getBoard(), Color.BLACK), new Position(0, 7));
+    private void initialBlackSetup() throws BoardException, ChessException {
+		placeNewPiece(new King(getBoard(), Color.BLACK), 'a',4);
+		placeNewPiece(new Rook(getBoard(), Color.BLACK) , 'a',0);
+		placeNewPiece(new Rook(getBoard(), Color.BLACK), 'a', 7);
     }
     
-    private void initialWhiteSetup() throws BoardException {
-    	board.placePiece(new King(getBoard(), Color.WHITE), new Position(7,3));
-		board.placePiece(new Rook(getBoard(), Color.WHITE) , new Position(7,0));
-		board.placePiece(new Rook(getBoard(), Color.WHITE), new Position(7, 7));
+    private void initialWhiteSetup() throws BoardException, ChessException {
+    	placeNewPiece(new King(getBoard(), Color.WHITE), 'h',3);
+		placeNewPiece(new Rook(getBoard(), Color.WHITE) , 'h',0);
+		placeNewPiece(new Rook(getBoard(), Color.WHITE), 'h', 7);
     }
     
-	private void initialSetup() throws BoardException {
+	private void initialSetup() throws BoardException, ChessException {
 		initialBlackSetup();
 		initialWhiteSetup();
 		
