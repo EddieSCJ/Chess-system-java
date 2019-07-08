@@ -7,6 +7,9 @@ public class Board {
 	private Piece pieces[][];
 	
 	public Board(int rows, int columns) {
+		if(rows <0 || columns <0) {
+			throw new BoardException("Error in board creation: Invalid rows or columns value")
+		}
 		this.setColunms(columns);
 		this.setRows(rows);
 		pieces = new Piece[columns][rows];
