@@ -1,8 +1,12 @@
 package application;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import boardgame.exceptions.BoardException;
 import chess.ChessMatch;
 import chess.ChessPiece;
+import chess.ChessPosition;
 import chess.Color;
 
 public class UI {
@@ -26,6 +30,20 @@ public class UI {
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
+	public ChessPosition readChessPosition(Scanner dado) {
+		try {
+		String position = dado.nextLine();
+		
+		char column = position.charAt(0);
+		int row = Integer.parseInt(position.substring(1));
+		
+		return new ChessPosition(column, row);
+		}
+		catch(Exception e) {
+			throw new InputMismatchException("Invalid value, valid values: a1 to h8");
+		}
+	}
+	
 	public static void printBoard(ChessMatch chessmatch) throws BoardException {
 
 		System.out.println("  __________________");

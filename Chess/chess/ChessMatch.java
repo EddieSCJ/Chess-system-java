@@ -1,6 +1,8 @@
 package chess;
 
 import boardgame.Board;
+import boardgame.Piece;
+import boardgame.Position;
 import boardgame.exceptions.BoardException;
 import chess.exceptions.ChessException;
 import chess.pieces.King;
@@ -56,6 +58,7 @@ public class ChessMatch {
 		
 	}
     
+	
 	
 }
  
