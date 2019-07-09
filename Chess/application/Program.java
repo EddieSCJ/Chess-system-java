@@ -11,6 +11,7 @@ import chess.exceptions.ChessException;
 
 public class Program {
 
+	
 	public static void main(String[] args) {
 	
 		Scanner dado = new Scanner(System.in);
@@ -27,8 +28,8 @@ public class Program {
 		}
 		
 		while(true) {
-			
 			try {
+			UI.clearScreen();
 			UI.printBoard(chessMatch);
 			System.out.println();
 			
@@ -43,11 +44,14 @@ public class Program {
 			}
 			catch(BoardException be) {
 				System.out.println(be.getMessage());
+				dado.nextLine();
 				System.out.println();
 			}
 			catch(InputMismatchException ime) {
 				System.out.println(ime.getMessage());
+				dado.nextLine();
 				System.out.println();
+				
 			}
 			
 		}
