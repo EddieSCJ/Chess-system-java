@@ -166,7 +166,7 @@ public class ChessMatch {
 	private Piece makeMove(Position source, Position target) throws BoardException {
 		Piece piece = board.removePiece(source);
 		Piece capturedPiece = board.removePiece(target); 
-		
+		piece.
 		if(capturedPiece != null) {
 			piecesOnTheBoard.remove(capturedPiece);
 			getCapturedPieces().add(capturedPiece);
