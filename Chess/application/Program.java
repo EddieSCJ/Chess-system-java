@@ -14,7 +14,7 @@ import chess.exceptions.ChessException;
 
 public class Program {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws BoardException {
 
 		List<ChessPiece> capturedPieces = new ArrayList<ChessPiece>();
 		Scanner dado = new Scanner(System.in);
@@ -31,7 +31,7 @@ public class Program {
 			System.out.println();
 		}
 
-		while (true) {
+		while (!chessMatch.isCheckMate()) {
 			try {
 				UI.clearScreen();
 				UI.printMatch(chessMatch, capturedPieces);
@@ -67,6 +67,9 @@ public class Program {
 			}
 
 		}
+		UI.clearScreen();
+		UI.printMatch(chessMatch, capturedPieces);
+		
 
 	}
 

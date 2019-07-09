@@ -20,6 +20,8 @@ public class ChessMatch {
 	private Color currentPlayer;
 	private List<Piece> piecesOnTheBoard = new ArrayList<Piece>();
 	private List<Piece> capturedPieces = new ArrayList<Piece>();
+	private boolean checkMate;
+	
 	
 	public ChessMatch() throws BoardException, ChessException {
 		this.board = new Board(8,8);
@@ -27,6 +29,12 @@ public class ChessMatch {
 		this.currentPlayer=Color.WHITE;
 		initialSetup();
 	}
+
+	
+	public boolean isCheckMate() {
+		return checkMate;
+	}
+
 
 	public boolean isCheck() {
 		return check;
@@ -54,6 +62,31 @@ public class ChessMatch {
 	private Color opponent(Color color){
 		return (color == Color.BLUE) ? Color.WHITE : Color.BLUE;
 	}
+	
+	private boolean testCheckMate(Color color) throws BoardException {
+		if (!checkTest(color)) {
+			return false;
+		}
+		List<Piece> list = piecesOnTheBoard.stream().filter(x -> ((ChessPiece)x).getColor() == color).collect(Collectors.toList());
+		for (Piece p : list) {
+			boolean[][] mat = p.possibleMoves();
+			for (int i=0; i<board.getRowsQuantity(); i++) {
+				for (int j=0; j<board.getColunmsQuantity(); j++) {
+					if (mat[i][j]) {
+						Position source = ((ChessPiece)p).getChessPosition().toPosition();
+						Position target = new Position(i, j);
+						Piece capturedPiece = makeMove(source, target);
+						boolean testCheck = checkTest(color);
+						undoMove(source, target, capturedPiece);
+						if (!testCheck) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
+	}	
 	
 	private ChessPiece king(Color color) {
 		List<Piece> kings = piecesOnTheBoard.stream().filter(N -> ((ChessPiece)N).getColor()==color).collect(Collectors.toList());
@@ -93,8 +126,13 @@ public class ChessMatch {
 			}
 			
 			this.check= (checkTest(opponent(currentPlayer))) ? true : false;
-			nextTurn();
 			
+			if (testCheckMate(opponent(currentPlayer))) {
+				checkMate = true;
+			}
+			else {
+				nextTurn();
+			}
 			return (ChessPiece) capturedPiece;
 		
 	}
