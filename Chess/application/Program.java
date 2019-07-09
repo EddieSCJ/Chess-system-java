@@ -1,9 +1,10 @@
 package application;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
-import boardgame.Piece;
 import boardgame.exceptions.BoardException;
 import chess.ChessMatch;
 import chess.ChessPiece;
@@ -15,6 +16,7 @@ public class Program {
 	
 	public static void main(String[] args) {
 	
+		List<ChessPiece> capturedPieces = new ArrayList<ChessPiece>();
 		Scanner dado = new Scanner(System.in);
 		ChessMatch chessMatch = null;
 		try {
@@ -34,7 +36,7 @@ public class Program {
 		while(true) {
 			try {
     			UI.clearScreen();
-    			UI.printBoard(chessMatch);
+    			UI.printMatch(chessMatch, capturedPieces);
     			System.out.println();
     			
     			System.out.print("Source: " );
@@ -49,18 +51,20 @@ public class Program {
     			
     			ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
     			
+    			capturedPieces.add(capturedPiece);
+    			
 			}
 			
 			catch(BoardException be) {
 				System.out.println(be.getMessage());
+				System.out.println("Type ENTER");
 				dado.nextLine();
-				System.out.println();
 			}
 			
 			catch(InputMismatchException ime) {
 				System.out.println(ime.getMessage());
+				System.out.println("Type ENTER");
 				dado.nextLine();
-				System.out.println();
 				
 			}
 			

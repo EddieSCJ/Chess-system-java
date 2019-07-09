@@ -11,12 +11,25 @@ import chess.pieces.Rook;
 public class ChessMatch {
 
 	private Board board;
+	private int turn;
+	private Color currentPlayer;
+	
 	
 	public ChessMatch() throws BoardException, ChessException {
 		this.board = new Board(8,8);
+		this.turn=1;
+		this.currentPlayer=Color.WHITE;
 		initialSetup();
 	}
 
+	public Color getCurrentPlayer() {
+		return currentPlayer;
+	}
+	
+	public int getTurn() {
+		return turn;
+	}
+	
 	public Board getBoard() {
 		return board;
 	}
@@ -34,16 +47,35 @@ public class ChessMatch {
 		Position target = targetPosition.toPosition();
 		
 			validateSourcePosition(source);
+			validateTargetPosition(source,target);
 			Piece capturedPiece = makeMove(source, target);
+		
+			nextTurn();
 			
 			return (ChessPiece) capturedPiece;
 		
+	}
+	
+	private void nextTurn() {
+		turn++;
+		currentPlayer = (currentPlayer==Color.WHITE) ? Color.BLUE : Color.WHITE;
+	}
+	
+	private void validateTargetPosition(Position source, Position target) throws ChessException, BoardException {
+		if(!getBoard().piece(source).possibleMove(target)){
+			throw new ChessException("This position is invalid, choose a valid position.");
+		}
+				
 	}
 	
 	private void validateSourcePosition(Position source) throws BoardException {
 		if(!board.thereIsAPiece(source)) {	
 			throw new ChessException("Has no piece in source position("+source+").");
 		}
+		if(getCurrentPlayer() != ((ChessPiece) board.piece(source)).getColor()) {
+			throw new ChessException("The chosen piece is not yours :D");
+		}
+		
 		if(!board.piece(source).IsThereAnyPossibleMove()) {
 			throw new ChessException("There is no possible moves for this piece.");
 		}
@@ -78,9 +110,9 @@ public class ChessMatch {
     
     
     private void initialBlackSetup() throws BoardException, ChessException {
-		placeNewPiece(new King(getBoard(), Color.BLACK), 'e',8);
-		placeNewPiece(new Rook(getBoard(), Color.BLACK) , 'a',8);
-		placeNewPiece(new Rook(getBoard(), Color.BLACK), 'h', 8);
+		placeNewPiece(new King(getBoard(), Color.BLUE), 'e',8);
+		placeNewPiece(new Rook(getBoard(), Color.BLUE) , 'a',8);
+		placeNewPiece(new Rook(getBoard(), Color.BLUE), 'h', 8);
     }
     
     private void initialWhiteSetup() throws BoardException, ChessException {

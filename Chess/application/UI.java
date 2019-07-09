@@ -1,10 +1,11 @@
 package application;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import boardgame.Board;
-import boardgame.Position;
 import boardgame.exceptions.BoardException;
 import chess.ChessMatch;
 import chess.ChessPiece;
@@ -51,6 +52,15 @@ public class UI {
 		}
 	}
 
+	public static void printMatch(ChessMatch chessMatch, List<ChessPiece> capturedPieces) throws BoardException {
+		printBoard(chessMatch);
+		System.out.println();
+		printCapturedPieces(capturedPieces);
+		System.out.println();
+		System.out.println("Turn: "+chessMatch.getTurn());
+		System.out.println("Waiting player: "+chessMatch.getCurrentPlayer());
+	}
+	
 	public static void printBoard(ChessMatch chessmatch, boolean possibleMoves[][]) throws BoardException {
 
 		System.out.println("  __________________");
@@ -85,6 +95,16 @@ public class UI {
 		System.out.println("   a b c d e f g h  ");
 	}
 
+	public static void printCapturedPieces(List<ChessPiece> capturedPieces) {
+		List<ChessPiece> white = capturedPieces.stream().filter(N -> N.getColor()==Color.WHITE).collect(Collectors.toList());
+		List<ChessPiece> blue  = capturedPieces.stream().filter(N -> N.getColor()==Color.BLUE).collect(Collectors.toList());
+		System.out.println();
+		System.out.println("Captured pieces: ");
+		System.out.println(ANSI_WHITE + "WHITE "+white.toString()+ANSI_RESET);
+		System.out.println(ANSI_BLUE + "BLUE: "+blue.toString()+ANSI_RESET);
+		
+	}
+	
 	public static void printPiece(ChessPiece piece, boolean background) {
 		if (background) {
 			System.out.print(ANSI_PURPLE_BACKGROUND);
@@ -92,8 +112,8 @@ public class UI {
 		if (piece == null) {
 			System.out.print("-" + ANSI_RESET);
 		} else {
-			if (piece.getColor() == Color.BLACK) {
-				System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
+			if (piece.getColor() == Color.BLUE) {
+				System.out.print(ANSI_BLUE + piece + ANSI_RESET);
 			} else {
 				System.out.print(ANSI_WHITE + piece + ANSI_RESET);
 			}
