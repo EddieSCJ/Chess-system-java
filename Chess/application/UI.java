@@ -3,6 +3,8 @@ package application;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import boardgame.Board;
+import boardgame.Position;
 import boardgame.exceptions.BoardException;
 import chess.ChessMatch;
 import chess.ChessPiece;
@@ -32,24 +34,24 @@ public class UI {
 
 	public static void clearScreen() {
 		System.out.println("\033[H\033[2J");
-		System.out.flush();;
+		System.out.flush();
+		;
 	}
-	
+
 	public static ChessPosition readChessPosition(Scanner dado) {
 		try {
-		String position = dado.nextLine();
-		
-		char column = position.charAt(0);
-		int row = Integer.parseInt(position.substring(1));
-		
-		return new ChessPosition(column, row);
-		}
-		catch(Exception e) {
+			String position = dado.nextLine();
+
+			char column = position.charAt(0);
+			int row = Integer.parseInt(position.substring(1));
+
+			return new ChessPosition(column, row);
+		} catch (Exception e) {
 			throw new InputMismatchException("Invalid value, valid values: a1 to h8");
 		}
 	}
-	
-	public static void printBoard(ChessMatch chessmatch) throws BoardException {
+
+	public static void printBoard(ChessMatch chessmatch, boolean possibleMoves[][]) throws BoardException {
 
 		System.out.println("  __________________");
 		for (int i = 0; i < chessmatch.getPieces().length; i++) {
@@ -57,7 +59,7 @@ public class UI {
 			System.out.print((8 - i) + "| ");
 
 			for (int j = 0; j < chessmatch.getPieces().length; j++) {
-				printPiece(chessmatch.getPieces()[i][j]);
+				printPiece(chessmatch.getPieces()[i][j], possibleMoves[i][j]);
 			}
 			System.out.println("|");
 			// System.out.println(" | |");
@@ -66,9 +68,29 @@ public class UI {
 		System.out.println("   a b c d e f g h  ");
 	}
 
-	public static void printPiece(ChessPiece piece) {
+	public static void printBoard(ChessMatch chessmatch) throws BoardException {
+
+		System.out.println("  __________________");
+		for (int i = 0; i < chessmatch.getPieces().length; i++) {
+
+			System.out.print((8 - i) + "| ");
+
+			for (int j = 0; j < chessmatch.getPieces().length; j++) {
+				printPiece(chessmatch.getPieces()[i][j], false);
+			}
+			System.out.println("|");
+			// System.out.println(" | |");
+		}
+		System.out.println("  ==================");
+		System.out.println("   a b c d e f g h  ");
+	}
+
+	public static void printPiece(ChessPiece piece, boolean background) {
+		if (background) {
+			System.out.print(ANSI_PURPLE_BACKGROUND);
+		}
 		if (piece == null) {
-			System.out.print("-");
+			System.out.print("-" + ANSI_RESET);
 		} else {
 			if (piece.getColor() == Color.BLACK) {
 				System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
@@ -78,5 +100,4 @@ public class UI {
 		}
 		System.out.print(" ");
 	}
-
 }

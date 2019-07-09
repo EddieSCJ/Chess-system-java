@@ -3,6 +3,7 @@ package chess;
 import boardgame.Board;
 import boardgame.Piece;
 import boardgame.Position;
+import boardgame.exceptions.BoardException;
 
 public abstract class ChessPiece extends Piece {
 
@@ -17,7 +18,7 @@ public abstract class ChessPiece extends Piece {
 		return color;
 	}
 	
-	public boolean isThereAnOpponentPiece(Position position) {
+	public boolean isThereAnOpponentPiece(Position position) throws BoardException {
 		ChessPiece piece = (ChessPiece) board.piece(position);
 		
 		return piece!= null && piece.getColor()!=color;

@@ -3,6 +3,7 @@ package application;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import boardgame.Piece;
 import boardgame.exceptions.BoardException;
 import chess.ChessMatch;
 import chess.ChessPiece;
@@ -38,9 +39,13 @@ public class Program {
     			
     			System.out.print("Source: " );
     			ChessPosition source = UI.readChessPosition(dado);
+    	 		
+    			UI.clearScreen();
+    			
+    			UI.printBoard(chessMatch, chessMatch.possibleMoves(source));
     			
     			System.out.print("Target: ");
-    			ChessPosition target = UI.readChessPosition(dado);
+    			ChessPosition target = UI.readChessPosition(dado);    			
     			
     			ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
     			

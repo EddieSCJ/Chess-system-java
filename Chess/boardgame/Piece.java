@@ -1,5 +1,7 @@
 package boardgame;
 
+import boardgame.exceptions.BoardException;
+
 public abstract class Piece {
 
 	protected Position position;
@@ -17,13 +19,13 @@ public abstract class Piece {
 	protected Board getBoard() {
 		return board;
 	}
-	public abstract boolean[][] possibleMoves();
+	public abstract boolean[][] possibleMoves() throws BoardException;
 	
-	public boolean possibleMove(Position position) {
+	public boolean possibleMove(Position position) throws BoardException {
 		return possibleMoves()[position.getRow()][position.getColumn()];
 	}
 	
-	public boolean IsThereAnyPossibleMove() {
+	public boolean IsThereAnyPossibleMove() throws BoardException {
 		boolean[][] possibleMoves = possibleMoves();
 		
 		for (int i = 0; i < possibleMoves.length; i++) {
