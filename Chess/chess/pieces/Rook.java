@@ -39,7 +39,6 @@ public class Rook extends ChessPiece {
 		
 		//bellow
 		position.setValues(this.position.getRow()+1, this.position.getColumn());
-		
 		while(getBoard().positionExists(position) && !getBoard().thereIsAPiece(position)) {
 			possibleMoves[position.getRow()][position.getColumn()] = true;
 			position.setRow(position.getRow()+1);

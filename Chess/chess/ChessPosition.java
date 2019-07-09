@@ -29,13 +29,13 @@ public class ChessPosition {
 		return row;
 	}
 
-	protected Position toPosition() {
+	protected  Position toPosition() {
 		int columnInt = (this.getColumn() - 'a');
 
 		return new Position((8 - getRow()), columnInt);
 	}
 
-	protected ChessPosition toChessPosition(Position position) throws ChessException {
+	protected static ChessPosition toChessPosition(Position position) throws ChessException {
 		return new ChessPosition((char)('a' + position.getColumn()), (8 - position.getRow()));
 	}
 

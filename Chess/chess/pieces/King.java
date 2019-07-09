@@ -1,6 +1,10 @@
 package chess.pieces;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import boardgame.Board;
+import boardgame.Piece;
 import boardgame.Position;
 import boardgame.exceptions.BoardException;
 import chess.ChessPiece;

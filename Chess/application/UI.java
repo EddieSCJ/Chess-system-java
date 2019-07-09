@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import boardgame.Piece;
 import boardgame.exceptions.BoardException;
 import chess.ChessMatch;
 import chess.ChessPiece;
@@ -63,6 +64,10 @@ public class UI {
 		}else {
 			System.out.println(ANSI_YELLOW+"Waiting player: "+ANSI_RESET+ANSI_BLUE+chessMatch.getCurrentPlayer()+ANSI_RESET);
 		}
+		if(chessMatch.isCheck()) {
+			System.out.println("CHECK!!!");
+		}
+		
 	}
 	
 	public static void printBoard(ChessMatch chessmatch, boolean possibleMoves[][]) throws BoardException {
@@ -100,8 +105,10 @@ public class UI {
 	}
 
 	public static void printCapturedPieces(List<ChessPiece> capturedPieces) {
-		List<ChessPiece> white = capturedPieces.stream().filter(N -> N.getColor()==Color.WHITE).collect(Collectors.toList());
-		List<ChessPiece> blue  = capturedPieces.stream().filter(N -> N.getColor()==Color.BLUE).collect(Collectors.toList());
+		
+		List<ChessPiece> white = capturedPieces.stream().filter(x -> x.getColor() == Color.WHITE).collect(Collectors.toList());
+		List<ChessPiece> blue = capturedPieces.stream().filter(x -> x.getColor() == Color.BLUE).collect(Collectors.toList());
+
 		System.out.println();
 		System.out.println("Captured pieces: ");
 		System.out.println(ANSI_WHITE + "WHITE "+white.toString()+ANSI_RESET);
