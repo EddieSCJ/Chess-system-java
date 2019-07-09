@@ -31,7 +31,7 @@ public class Program {
 			System.out.println();
 		}
 
-		while (!chessMatch.isCheckMate()) {
+		while (!chessMatch.getCheckMate()) {
 			try {
 				UI.clearScreen();
 				UI.printMatch(chessMatch, capturedPieces);
