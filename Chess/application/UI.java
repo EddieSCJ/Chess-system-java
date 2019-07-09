@@ -30,7 +30,7 @@ public class UI {
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
-	public ChessPosition readChessPosition(Scanner dado) {
+	public static ChessPosition readChessPosition(Scanner dado) {
 		try {
 		String position = dado.nextLine();
 		

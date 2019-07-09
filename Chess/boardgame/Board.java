@@ -50,7 +50,7 @@ public class Board {
 		}
 		
 		this.pieces[position.getRow()][position.getColumn()] = piece;
-		piece.setPosition(position);
+		piece.position = position;
 	}
 
 	public boolean positionExists(int row, int column) {
@@ -75,12 +75,12 @@ public class Board {
 		if(!positionExists(position)) {
 			throw new BoardException("This position("+position+") does not exist on this board.");
 		}
-		if(position == null) {
+		if(piece(position) == null) {
 			return null;
 		}
 		
 		Piece piece = piece(position);
-		piece.setPosition(null);
+		piece.position = null;
 		
 		pieces[position.getRow()][position.getColumn()] = null;
 		
