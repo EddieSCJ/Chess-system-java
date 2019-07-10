@@ -1,2 +1,7 @@
 # Chess-system-java
-This is a project about a chess game system for the terminal of pc.
+  Hello everybody, welcome to this project, we did a chess game to run on terminal. The game has some colors to make your experience with our game better, then follow our instructions to enjoy the game.
+
+# How to play?
+
+      # WINDOWS
+      
