@@ -34,5 +34,5 @@ If you use **linux**, you does not need to install a colorful terminal, else, yo
  
 ## How to run? 
    * Open the terminal
-   * Acess the directory where is your package.with *cd NameOfDirectory/*
+   * Acess the directory where is your package with *cd NameOfDirectory/*
    * Type java -jar ChessGame.jar
