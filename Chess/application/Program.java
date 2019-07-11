@@ -16,9 +16,14 @@ public class Program {
 
 	public static void main(String[] args) throws BoardException {
 
+		/**
+		 * @author EddieSCJ
+		 */
+		
 		List<ChessPiece> capturedPieces = new ArrayList<ChessPiece>();
 		Scanner dado = new Scanner(System.in);
 		ChessMatch chessMatch = null;
+	
 		try {
 
 			chessMatch = new ChessMatch();
@@ -34,9 +39,11 @@ public class Program {
 		while (!chessMatch.getCheckMate()) {
 			try {
 				UI.clearScreen();
+				System.out.println("Author: EddieSCJ");
+				System.out.println();
 				UI.printMatch(chessMatch, capturedPieces);
 				System.out.println();
-
+				
 				System.out.print("Source: ");
 				ChessPosition source = UI.readChessPosition(dado);
 
