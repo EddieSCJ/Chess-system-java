@@ -18,6 +18,7 @@ If you use **linux**, you does not need to install a colorful terminal, else, yo
 
   Follow the instructions of installer.
   
+
 ### WINDOWS
    * Install the gitBash
      
@@ -33,6 +34,11 @@ If you use **linux**, you does not need to install a colorful terminal, else, yo
    Follow the instructions of installer.
  
 ## How to run? 
+   * Unpack the Chess-system-java.zip
+   
+         Linux: unzip -v yourpackname.zip
+         Windows: Right botton in the pack > Extract here
+         
    * Open the terminal
-   * Acess the directory where is your package with *cd NameOfDirectory/*
+   * Acess the directory where is your package with *cd NameOfDirectory/Chess-system-java*
    * Type java -jar ChessGame.jar
